@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}
+{{post.title | capfirst }}{% endblock title %}
+{% load static %}
+{% block main_content %}
+<div class="contentx">
+    <p style="float: left;">
+    {% for categeryyyy in singe %}
+    <b class="border p-1">{{categeryyyy.name}}</b>
+    {% endfor %}
+    </p>
+<p style="float: right;">Views : {{post.view}}</p>
+    <img src="{{post.thumbnail.url}}" class="img-fluid" alt="...">
+    <div class="heading p-3">
+        <h1>{{post.title}}</h1>
+        <p><b>{{post.added_date}}</b> &map; <b> By Ravi Raushan</b> </p>
+
+    </div>
+    <div class="container content">
+        {{post.content | safe }}
+    </div>
+</div>
+<form class="comment-section" action='/{{blog}}' method='POST'>
+{% csrf_token %}
+    <p>Leave Here ...</p>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="text" name='nm' class="form-control" id="exampleFormControlInput1" placeholder="Enter Name.." required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
+        <textarea class="form-control" name='comment' id="exampleFormControlTextarea1" rows="3" required></textarea>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+
+    {% comment %} for comments {% endcomment %}
+{% for comment in commentsx %}
+    <div class="comments m-2 p-2">
+        <div class="heading-icons">
+            <img src="https://img.icons8.com/clouds/100/000000/user.png" />
+            <p>{{comment.name}}</p>
+        </div>
+        <p class='comment-content'>{{comment.comment|safe }}</p>
+        <p>Date : {{comment.date}}</p>
+    </div>
+    {% endfor %}
+    
+</form>
+{% endblock main_content %}
+{% block style %}
+
+.comment-content a{
+    text-decoration:none;
+}
+.comments .heading-icons{
+    display:grid;
+    grid-template-columns:1fr 10fr ;
+}
+.comments .heading-icons P{
+    margin:15px;cursor:pointer;
+}
+.comments .heading-icons img {
+    margin:4px;
+    width:50px;
+    height:50px;
+    cursor:pointer;
+}
+
+.container-flud {
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+        'header header header header'
+        'ccontent ccontent ccontent sidebar'
+        'ccontent ccontent ccontent sidebar'
+        'footer footer footer footer'
+    ;
+    width: 100%;
+}
+
+.sidebar {
+    display: block;
+    padding: 10px;
+    grid-area: sidebar;
+    text-align: center;
+}
+@media only screen and (max-width: 600px) {
+    .destop-top-menu {
+        display: none;
+    }
+
+    .container-flud {
+        grid-template-areas:
+        'header header header header'
+        'ccontent ccontent ccontent ccontent'
+        'sidebar sidebar sidebar sidebar'
+        'footer footer footer footer';
+    }
+}
+
+{% endblock style %}
+
+{% block seo_decs %}
+{{post.meta_decs | slice:'150' | capfirst}}
+{% endblock seo_decs %}
+{% block seo_keywords %}
+{{post.keywords}}
+{% endblock seo_keywords %}

@@ -1,0 +1,13 @@
+{
+    "name": "Eaish Blog",
+    "short_name": "Eaish",
+    "start_url": "www.eaish.in",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A Simple Blog Page.",
+    "icons": [{
+      "src": "static/favicon/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/png"
+    }]
+  }

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Home{% endblock title %}
+{% load static %}
+{% block main_content %}
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for blog in all_blogs %}
+    <a href="/blog/{{blog.slug}}" class="col" id="collll">
+        <div class="card">
+        {% if blog.thumbnail %}
+            <img src="{{ blog.thumbnail.url }}" class="card-img-top" alt="...">
+        {% endif %}
+            <div class="card-body">
+                <h6 class="card-title">{{blog.title}}</h6>
+
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% if all_blog_len < numberofposts %}
+<div class="container">
+</div>
+{% else %}
+<div class="container my-4">
+    <nav aria-label="...">
+        <ul class="pagination text-center">
+        {% if prev %}
+            <li class="page-item">
+                <a class="page-link" href="/?p={{prev}}" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+        {% else %}
+        <li class="page-item disabled">
+                <a class="page-link" href="/?p=#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+        {% endif %}
+            <li class="page-item active"><a class="page-link" href="/?p={{page}}">{{page}}</a></li>
+        {% if nxt %}
+            <li class="page-item">
+                <a class="page-link" href="/?p={{nxt}}">Next</a>
+            </li>
+        {% else %}
+        <li class="page-item disabled">
+                <a class="page-link" href="/?p=#">Next</a>
+            </li>
+        {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+{% endblock main_content %}
+{% block full_footer %}
+
+{% endblock full_footer %}
+
+{% block seo_decs %}
+{{seo.SiteDecs | slice:'150' | capfirst}}
+{% endblock seo_decs %}
+{% block seo_keywords %}
+{{seo.SiteKeywords}}
+{% endblock seo_keywords %}

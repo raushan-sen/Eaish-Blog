@@ -1,0 +1,11 @@
+User-Agent: *
+
+Disallow: /admin
+Disallow: /static/images/default.jpg
+Disallow: /static/images/ppp.jpg
+Allow: /static
+Allow: /main
+Allow: /blog
+Allow: /page
+
+Sitemap: http://127.0.0.1:8000/sitemap.xml
